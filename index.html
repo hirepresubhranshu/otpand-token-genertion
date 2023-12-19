@@ -1,0 +1,146 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verify</title>
+</head>
+<body>
+    <center>
+        <H1>Hii , Welcome to my Page</H1>
+        <h2>Verify your phone number 👇</h2>
+    </center>
+    <center>
+        <label for="mobile">Enter Your Phone Number 👉</label>
+        <input type="text" maxlength="10" required>
+    </center>
+    <div style="margin:auto; width:50%; padding:10px;">
+        <button onclick="sendOtp()" id="submitBtn">Send OTP</button>
+        </div><br/>
+        <div id="otpField" style="display:none;">
+            <center>
+                <label for="otp">Enter One Time Password (OTP) 🔒</label>
+                <input type="number" min="0" id="otpInput" required><br/>
+                <small>Didn't get the OTP? <a href="#" onclick="resendOtp()">Resend OTP
+                    ✉️</a></small><br/><br/>
+                    <button onclick="verifyOtp()">Verify OTP</button>
+                    </center>
+                    </div>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                        function sendOtp(){
+                            var mobile = $('input[type=text]').val();
+                            if(mobile == ''){
+                                alert('Please enter a valid Mobile Number');
+                                return false;
+                                }else {
+                                    $.ajax({
+                                        url:"{{route('send_otp')}}",
+                                        method:'POST',
+                                        data:{mob:mobile},
+                                        success:function(data){
+                                            $('#otpField').show();
+                                            $('#submitBtn').hide();
+                                            },error:function(){
+                                                alert("Error Occured");
+                                                }
+                                                });
+                                                }
+                                                }
+                                                // Resend Otp Code
+                                                function resendOtp(){
+                                                    location.reload();
+                                                    }
+                                                    // Validate and verify otp code
+                                                    function verifyOtp(){
+                                                        var otp = $('#otpInput').val();
+                                                        if(otp==''){
+                                                            alert('Please Enter OTP');return false;
+                                                            }
+                                                            $.ajax({
+                                                                url:"{{route('verify_otp')}}",
+                                                                method:'POST',
+                                                                data:{otpp:otp},
+                                                                success:function(data){
+                                                                    if(data=="verified"){
+                                                                        window.location.href="/home";
+                                                                        }else{
+                                                                            alert('Invalid OTP');
+                                                                            }
+                                                                            },error:function(){
+                                                                                alert("Error Occured in Verification");
+                                                                                alert("Error Occured in Verification");
+                                                                                alert("Error Occured");
+                                                                                }
+                                                                                })
+                                                                                }
+                                                                                </script>
+
+                     </div>
+                 </div>
+             </div>
+        </div>
+    </div>
+</div>
+            </center>
+        </div>
+    </div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Mobile Number OTP Verification</title>
+        <style>
+            body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.form {
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+}
+
+input {
+  padding: 8px;
+  margin-right: 10px;
+}
+
+#verificationResult {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Mobile Number OTP Verification</h1>
+            <div class="form">
+                <label for="phoneNumber">Enter your phone number:</label>
+                <input type="text" id="phoneNumber" placeholder="Enter your phone number">
+                <button id="generateOTP">Generate OTP</button>
+            </div>
+            <div class="otpInput" style="display:none;">
+                <label for="otp">Enter OTP:</label>
+                <input type="text" id="otp" placeholder="Enter OTP">
+                <button id="verifyOTP">Verify</button>
+                <p id="verificationResult"></p>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+
+</html>
